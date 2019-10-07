@@ -7,17 +7,42 @@
     <h1 class="display-4">Города</h1>
     <div class="row">
         <div class="col-md-6">
-            {% for object in objects_list %}
-                <p>{{ object.name }}</p>
-            {% endfor %}
+            <table class="table table-striped">
+                <tbody>
+                {% for object in objects_list %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'city:detail' pk=object.pk %}">
+                                {{ object.name }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'city:update' pk=object.pk %}">
+                                <button type="button" class="btn btn-primary btn-sm">
+                                    Редактировать
+                                </button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'city:delete' pk=object.pk %}">
+                                <button type="button" class="btn btn-danger btn-sm">
+                                    Удалить
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
-
-
-            <form action="" method="post">{% csrf_token %}
-                {{ form.as_p }}
-                <br>
-                <input type="submit" value="Сохранить">
-            </form>
+    <div class="row">
+        <div class="col-md-6">
+            <a href="{% url 'city:add' %}">
+                <button type="button" class="btn btn-success btn-sm">
+                    Добавить
+                </button>
+        </div>
+    </div>
 
 {% endblock %}

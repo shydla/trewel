@@ -30,13 +30,17 @@ class CityCreateView(CreateView):
     template_name = 'cities/create.html'
     success_url = reverse_lazy('city:home')
 
-class CityDeleteView(CreateView):
+
+class CityDeleteView(DeleteView):
     model = City
-    form_class = CityForm
-    template_name = 'cities/delete.html'
+#    template_name = 'cities/delete.html'
     success_url = reverse_lazy('city:home')
 
-class CityUpdateView(CreateView):
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+
+
+class CityUpdateView(UpdateView):
     model = City
     form_class = CityForm
     template_name = 'cities/update.html'
