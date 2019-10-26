@@ -19,8 +19,10 @@ def home(request):
     cities = City.objects.all()
     paginator = Paginator(cities, 2)
     page = request.GET.get('page')
-    cities = paginator.get_page(page)
-    return render(request, 'cities/home.html', {'objects_list': cities, })
+    objects_list = paginator.get_page(page)
+    return render(request, 'cities/home.html', {'objects_list': objects_list,
+                                                'page_up': str(int(page) + 2),
+                                                'page_down': str(int(page) - 2)})
 
 
 class CityDetailView(DetailView):
